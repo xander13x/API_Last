@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="clientesModelStoreContainer" CdmEntityContainer="clientesEntities">
+    <EntitySetMapping Name="CAT_CMV_TIPO_CUENTA">
+      <EntityTypeMapping TypeName="clientesModel.CAT_CMV_TIPO_CUENTA">
+        <MappingFragment StoreEntitySet="CAT_CMV_TIPO_CUENTA">
+          <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+          <ScalarProperty Name="nombreCuenta" ColumnName="nombreCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CMV_CLIENTE">
+      <EntityTypeMapping TypeName="clientesModel.TBL_CMV_CLIENTE">
+        <MappingFragment StoreEntitySet="TBL_CMV_CLIENTE">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+          <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="curp" ColumnName="curp" />
+          <ScalarProperty Name="fechaAlta" ColumnName="fechaAlta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CMV_CLIENTE_CUENTA">
+      <EntityTypeMapping TypeName="clientesModel.TBL_CMV_CLIENTE_CUENTA">
+        <MappingFragment StoreEntitySet="TBL_CMV_CLIENTE_CUENTA">
+          <ScalarProperty Name="idClienteCuenta" ColumnName="idClienteCuenta" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+          <ScalarProperty Name="saldoActual" ColumnName="saldoActual" />
+          <ScalarProperty Name="fechaContratacion" ColumnName="fechaContratacion" />
+          <ScalarProperty Name="fechaUltimoMovimiento" ColumnName="fechaUltimoMovimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

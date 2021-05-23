@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="clientesModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAT_CMV_TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+          </Key>
+          <Property Name="idCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCuenta" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_CMV_CLIENTE">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="curp" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="fechaAlta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_CMV_CLIENTE_CUENTA">
+          <Key>
+            <PropertyRef Name="idClienteCuenta" />
+          </Key>
+          <Property Name="idClienteCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idCuenta" Type="int" Nullable="false" />
+          <Property Name="saldoActual" Type="money" Nullable="false" />
+          <Property Name="fechaContratacion" Type="datetime" Nullable="false" />
+          <Property Name="fechaUltimoMovimiento" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TBL_CMV_C__idCli__145C0A3F">
+          <End Role="TBL_CMV_CLIENTE" Type="Self.TBL_CMV_CLIENTE" Multiplicity="1" />
+          <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CMV_CLIENTE">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_CMV_C__idCue__15502E78">
+          <End Role="CAT_CMV_TIPO_CUENTA" Type="Self.CAT_CMV_TIPO_CUENTA" Multiplicity="1" />
+          <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_CMV_TIPO_CUENTA">
+              <PropertyRef Name="idCuenta" />
+            </Principal>
+            <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+              <PropertyRef Name="idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="clientesModel1StoreContainer">
+          <EntitySet Name="CAT_CMV_TIPO_CUENTA" EntityType="Self.CAT_CMV_TIPO_CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CMV_CLIENTE" EntityType="Self.TBL_CMV_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CMV_CLIENTE_CUENTA" EntityType="Self.TBL_CMV_CLIENTE_CUENTA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TBL_CMV_C__idCli__145C0A3F" Association="Self.FK__TBL_CMV_C__idCli__145C0A3F">
+            <End Role="TBL_CMV_CLIENTE" EntitySet="TBL_CMV_CLIENTE" />
+            <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_CMV_C__idCue__15502E78" Association="Self.FK__TBL_CMV_C__idCue__15502E78">
+            <End Role="CAT_CMV_TIPO_CUENTA" EntitySet="CAT_CMV_TIPO_CUENTA" />
+            <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="clientesModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CAT_CMV_TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+          </Key>
+          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_CMV_CLIENTE_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCue__15502E78" FromRole="CAT_CMV_TIPO_CUENTA" ToRole="TBL_CMV_CLIENTE_CUENTA" />
+        </EntityType>
+        <EntityType Name="TBL_CMV_CLIENTE">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="curp" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TBL_CMV_CLIENTE_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCli__145C0A3F" FromRole="TBL_CMV_CLIENTE" ToRole="TBL_CMV_CLIENTE_CUENTA" />
+        </EntityType>
+        <EntityType Name="TBL_CMV_CLIENTE_CUENTA">
+          <Key>
+            <PropertyRef Name="idClienteCuenta" />
+          </Key>
+          <Property Name="idClienteCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idCuenta" Type="Int32" Nullable="false" />
+          <Property Name="saldoActual" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fechaContratacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaUltimoMovimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CAT_CMV_TIPO_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCue__15502E78" FromRole="TBL_CMV_CLIENTE_CUENTA" ToRole="CAT_CMV_TIPO_CUENTA" />
+          <NavigationProperty Name="TBL_CMV_CLIENTE" Relationship="Self.FK__TBL_CMV_C__idCli__145C0A3F" FromRole="TBL_CMV_CLIENTE_CUENTA" ToRole="TBL_CMV_CLIENTE" />
+        </EntityType>
+        <Association Name="FK__TBL_CMV_C__idCue__15502E78">
+          <End Role="CAT_CMV_TIPO_CUENTA" Type="Self.CAT_CMV_TIPO_CUENTA" Multiplicity="1" />
+          <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_CMV_TIPO_CUENTA">
+              <PropertyRef Name="idCuenta" />
+            </Principal>
+            <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+              <PropertyRef Name="idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_CMV_C__idCli__145C0A3F">
+          <End Role="TBL_CMV_CLIENTE" Type="Self.TBL_CMV_CLIENTE" Multiplicity="1" />
+          <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CMV_CLIENTE">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="clientesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAT_CMV_TIPO_CUENTA" EntityType="Self.CAT_CMV_TIPO_CUENTA" />
+          <EntitySet Name="TBL_CMV_CLIENTE" EntityType="Self.TBL_CMV_CLIENTE" />
+          <EntitySet Name="TBL_CMV_CLIENTE_CUENTA" EntityType="Self.TBL_CMV_CLIENTE_CUENTA" />
+          <AssociationSet Name="FK__TBL_CMV_C__idCue__15502E78" Association="Self.FK__TBL_CMV_C__idCue__15502E78">
+            <End Role="CAT_CMV_TIPO_CUENTA" EntitySet="CAT_CMV_TIPO_CUENTA" />
+            <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_CMV_C__idCli__145C0A3F" Association="Self.FK__TBL_CMV_C__idCli__145C0A3F">
+            <End Role="TBL_CMV_CLIENTE" EntitySet="TBL_CMV_CLIENTE" />
+            <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="clientesModel1StoreContainer" CdmEntityContainer="clientesEntities1">
+          <EntitySetMapping Name="CAT_CMV_TIPO_CUENTA">
+            <EntityTypeMapping TypeName="clientesModel1.CAT_CMV_TIPO_CUENTA">
+              <MappingFragment StoreEntitySet="CAT_CMV_TIPO_CUENTA">
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="nombreCuenta" ColumnName="nombreCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CMV_CLIENTE">
+            <EntityTypeMapping TypeName="clientesModel1.TBL_CMV_CLIENTE">
+              <MappingFragment StoreEntitySet="TBL_CMV_CLIENTE">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="rfc" ColumnName="rfc" />
+                <ScalarProperty Name="curp" ColumnName="curp" />
+                <ScalarProperty Name="fechaAlta" ColumnName="fechaAlta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CMV_CLIENTE_CUENTA">
+            <EntityTypeMapping TypeName="clientesModel1.TBL_CMV_CLIENTE_CUENTA">
+              <MappingFragment StoreEntitySet="TBL_CMV_CLIENTE_CUENTA">
+                <ScalarProperty Name="idClienteCuenta" ColumnName="idClienteCuenta" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="saldoActual" ColumnName="saldoActual" />
+                <ScalarProperty Name="fechaContratacion" ColumnName="fechaContratacion" />
+                <ScalarProperty Name="fechaUltimoMovimiento" ColumnName="fechaUltimoMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

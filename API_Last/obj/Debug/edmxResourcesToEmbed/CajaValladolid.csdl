@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="clientesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAT_CMV_TIPO_CUENTA">
+    <Key>
+      <PropertyRef Name="idCuenta" />
+    </Key>
+    <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TBL_CMV_CLIENTE_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCue__15502E78" FromRole="CAT_CMV_TIPO_CUENTA" ToRole="TBL_CMV_CLIENTE_CUENTA" />
+  </EntityType>
+  <EntityType Name="TBL_CMV_CLIENTE">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="curp" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="TBL_CMV_CLIENTE_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCli__145C0A3F" FromRole="TBL_CMV_CLIENTE" ToRole="TBL_CMV_CLIENTE_CUENTA" />
+  </EntityType>
+  <EntityType Name="TBL_CMV_CLIENTE_CUENTA">
+    <Key>
+      <PropertyRef Name="idClienteCuenta" />
+    </Key>
+    <Property Name="idClienteCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="idCuenta" Type="Int32" Nullable="false" />
+    <Property Name="saldoActual" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="fechaContratacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fechaUltimoMovimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CAT_CMV_TIPO_CUENTA" Relationship="Self.FK__TBL_CMV_C__idCue__15502E78" FromRole="TBL_CMV_CLIENTE_CUENTA" ToRole="CAT_CMV_TIPO_CUENTA" />
+    <NavigationProperty Name="TBL_CMV_CLIENTE" Relationship="Self.FK__TBL_CMV_C__idCli__145C0A3F" FromRole="TBL_CMV_CLIENTE_CUENTA" ToRole="TBL_CMV_CLIENTE" />
+  </EntityType>
+  <Association Name="FK__TBL_CMV_C__idCue__15502E78">
+    <End Role="CAT_CMV_TIPO_CUENTA" Type="Self.CAT_CMV_TIPO_CUENTA" Multiplicity="1" />
+    <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_CMV_TIPO_CUENTA">
+        <PropertyRef Name="idCuenta" />
+      </Principal>
+      <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+        <PropertyRef Name="idCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TBL_CMV_C__idCli__145C0A3F">
+    <End Role="TBL_CMV_CLIENTE" Type="Self.TBL_CMV_CLIENTE" Multiplicity="1" />
+    <End Role="TBL_CMV_CLIENTE_CUENTA" Type="Self.TBL_CMV_CLIENTE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CMV_CLIENTE">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="TBL_CMV_CLIENTE_CUENTA">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="clientesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAT_CMV_TIPO_CUENTA" EntityType="Self.CAT_CMV_TIPO_CUENTA" />
+    <EntitySet Name="TBL_CMV_CLIENTE" EntityType="Self.TBL_CMV_CLIENTE" />
+    <EntitySet Name="TBL_CMV_CLIENTE_CUENTA" EntityType="Self.TBL_CMV_CLIENTE_CUENTA" />
+    <AssociationSet Name="FK__TBL_CMV_C__idCue__15502E78" Association="Self.FK__TBL_CMV_C__idCue__15502E78">
+      <End Role="CAT_CMV_TIPO_CUENTA" EntitySet="CAT_CMV_TIPO_CUENTA" />
+      <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TBL_CMV_C__idCli__145C0A3F" Association="Self.FK__TBL_CMV_C__idCli__145C0A3F">
+      <End Role="TBL_CMV_CLIENTE" EntitySet="TBL_CMV_CLIENTE" />
+      <End Role="TBL_CMV_CLIENTE_CUENTA" EntitySet="TBL_CMV_CLIENTE_CUENTA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b45d8126698e46e0b0279de7b22fbbc6" Name="Diagram1">
+        <EntityTypeShape EntityType="clientesModel.CAT_CMV_TIPO_CUENTA" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="clientesModel.TBL_CMV_CLIENTE" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="clientesModel.TBL_CMV_CLIENTE_CUENTA" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="clientesModel.FK__TBL_CMV_C__idCue__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="clientesModel.FK__TBL_CMV_C__idCli__145C0A3F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
